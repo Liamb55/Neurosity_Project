@@ -1,0 +1,10 @@
+{% set title = "Logout" %}
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- [html-validate-disable attribute-allowed-values] -->
+    <p>Are you sure you want to log out?</p>
+    <form action="{{ url_for('logout_action') }}" method="POST">
+        <button type="submit">Logout</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>EEG File Sharing using data from Neurosity Crown Headsets</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main3.css') }}">
+</head>
+<body>
+  <header >    
+  <h1>EEG File Sharing using data from Neurosity Crown Headsets</h1>           
+
+    <nav class="navbar">
+      <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('neurosity') }}">Intro to Neurosity</a></li>
+        <li><a href="{{ url_for('kinesis') }}">Kinesis</a></li>
+
+
+      {% if current_user.is_authenticated %}
+      <li><a href="{{ url_for('searchDatasets') }}">Search</a></li>
+      <li><a href="{{ url_for('logout_page') }}">Logout</a></li>
+      {% else %}
+        <li><a href="{{ url_for('login_page') }}">Login</a></li>
+        <li><a href="{{ url_for('register_page') }}">Register</a></li>
+      {% endif %}
+      </ul>
+    </nav>
+  </header>
+<main>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul class="flashes">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}     
+
+
+
+</main>
+ 
+</body>
+</html>

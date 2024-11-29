@@ -1,0 +1,31 @@
+{% set title = "Search" %}
+{% extends 'base.html' %}
+
+{% block content %}
+<h3> Search Datasets: </h3>
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Dataset name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Owner</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr><td></td></tr>
+    {% for ds in djdatasets %}
+      <tr>
+          <td><a href="{{ url_for('showData', ds_id=ds.ds_id ) }}"> {{ ds.name }} </a></td>
+          <td> {{ ds.description }} </td>
+          <td> {{ ds.owner_username }} </td>
+          {% if ds.issubscribed == 1 %}
+            <td><a href="{{ url_for('unsubscribe', ds_id=ds.ds_id ) }}">Unsubscribe</a></td>
+          {% else %}
+            <td><a href="{{ url_for('subscribe', ds_id=ds.ds_id ) }}">Subscribe</a></td>
+          {% endif %}
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

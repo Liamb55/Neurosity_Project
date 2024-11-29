@@ -1,0 +1,275 @@
+/* Global Styles */
+
+  
+  
+body {
+    font-family: Arial, sans-serif;
+    font-size:17px;
+    margin: 50px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    color: #333;
+  }
+
+  h1 {
+    margin-top: 0;
+  }
+
+  /* Header Styles */
+  header {
+    background-color: #527ad2;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+  }
+/* Navigation Styles */
+nav {
+    margin-bottom: 20px;
+  }
+
+  .navbar ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .navbar li {
+    margin-right: 10px;
+  }
+
+  .navbar a {
+    color: #333;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 3px;
+    background-color: #D2AA52;
+    transition: background-color 0.3s ease;
+  }
+
+  .navbar a:hover {
+    background-color: #333;
+    color: #fff;
+  }
+
+  /* Main Content Styles */
+main {
+    padding: 20px;
+  }
+
+  /* Flash messages container */
+.flashes {
+    display: block;
+    width: 80%;
+    margin: auto auto 20px auto;
+    pointer-events: none; /* Disable the hover effect */
+  }
+
+  /* Flash message */
+  .flashes li {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    color: #300505;
+    background-color: #a7ac1b;
+  }
+
+  /* List styling */
+  ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+  }
+
+  li {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .post-meta {
+    flex-grow: 1;
+    margin-top: -20px;
+    font: italic 14px/1.4 Georgia, serif;
+    background-color: #f5f5f5;
+  }
+
+  .post-content {
+    flex-grow: 1;
+    margin-bottom: 10px;
+    white-space: pre-wrap; /* Preserve line breaks */
+  }
+
+  /* Form Styles */
+  form {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-gap: 10px;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  textarea {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+  }
+
+  textarea {
+    height: 10em;
+    resize: vertical;
+  }
+
+  input[type="text"]:focus,
+  input[type="password"]:focus,
+  textarea:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+
+  button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #fd7e14;
+  }
+
+/* Table formatting */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h2 {
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+label {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+  .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text {
+  font-size: 17px;
+  padding-left: 20px
+  padding-right:10px;
+  margin-left:10px;
+}
+.image {
+  max-width: 100%;
+  max-height:100%;
+}
+
+.position { font-family: Arial, sans-serif;
+  font-size:17px;
+  margin: 50px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.collapsible:after {
+  content: '\002B';
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+  

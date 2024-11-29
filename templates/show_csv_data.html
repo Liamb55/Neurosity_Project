@@ -1,0 +1,215 @@
+{% set title = "Dataset" %}
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Dataset Details:</h3>
+<table>
+  <tr>
+    <th style="width:10%"></th>
+    
+    {% if user.user_id == ds_info.owner_id %}
+      <th style="width:85%"></th>
+      <th style="width:5%"></th>
+    {% else %}
+      <th style="width:90%"></th> 
+    {% endif %}
+  </tr>
+  <tr>
+    <td>Name</td>
+    <td> {{ ds_info.name }} </td>
+  </tr>
+  {% if user.user_id == ds_info.owner_id %}
+  <tr>
+    <form action="{{ url_for('update_desc', ds_id=ds_info.ds_id) }}" method="POST">
+      <td>Description</td>
+      <td> <input type="text" name="description" value= "{{ ds_info.description }}" style="display:table-cell; width:98%"> </td>
+      <td> <button type="submit">Edit</button> </td>
+    </form>
+  </tr>
+
+  {% else %}
+  <tr>
+    <td>Description</td>
+    <td> {{ ds_info.description }} </td>
+  </tr>
+  {% endif %}
+
+  <tr>
+    <td>Download</td>
+    <td><a href="{{ url_for('download_file', ds_id=ds_info.ds_id ) }}">Link</a></td>
+  </tr>
+  {% if user.user_id == ds_info.owner_id %}
+  <tr>
+    <td>Delete</td>
+    <td><a href="{{ url_for('delete_file', ds_id=ds_info.ds_id ) }}">Delete Dataset</a></td>
+  </tr>
+  {% endif %}
+  
+</table>
+
+<button class="collapsible">Chart Data</button>
+<div class="content">
+  <div style="height: 50vh; width: 100%;">
+    <canvas id="myChart"></canvas>
+  </div>
+</div>
+
+<button class="collapsible">Show Data</button>
+<div class="content">
+  <br>    
+  <table>
+    <tr>
+      <th style="width:5%; text-align: center; vertical-align: middle;">Sample No</th>
+      <th style="width:15%; text-align: center; vertical-align: middle;">Timestamp</th>
+      <th style="width:10%; text-align: center; vertical-align: middle;">CP3</th>
+      <th style="width:10%; text-align: center; vertical-align: middle;">C3</th>
+      <th style="width:10%; text-align: center; vertical-align: middle;">F5</th>
+      <th style="width:10%; text-align: center; vertical-align: middle;">PO3</th>
+      <th style="width:10%; text-align: center; vertical-align: middle;">PO4</th>
+      <th style="width:10%; text-align: center; vertical-align: middle;">F6</th>
+      <th style="width:10%; text-align: center; vertical-align: middle;">C4</th>
+      <th style="width:10%; text-align: center; vertical-align: middle;">CP4</th>
+    </tr>
+    {% for r in data["labels"] %}
+    <tr>
+      <td style="text-align: center; vertical-align: middle;"> {{ loop.index }}	</td>
+      <td style="text-align: center; vertical-align: middle;"> {{ data["labels"][loop.index - 1 ]}}	</td>
+      <td style="text-align: center; vertical-align: middle;"> {{ data["CP3"][loop.index - 1 ]   }}	</td>
+      <td style="text-align: center; vertical-align: middle;"> {{ data["C3"][loop.index - 1 ]    }}	</td>
+      <td style="text-align: center; vertical-align: middle;"> {{ data["F5"][loop.index - 1 ]    }}	</td>
+      <td style="text-align: center; vertical-align: middle;"> {{ data["PO3"][loop.index - 1 ]   }}	</td>
+      <td style="text-align: center; vertical-align: middle;"> {{ data["PO4"][loop.index - 1 ]   }}	</td>
+      <td style="text-align: center; vertical-align: middle;"> {{ data["F6"][loop.index - 1 ]    }}	</td>
+      <td style="text-align: center; vertical-align: middle;"> {{ data["C4"][loop.index - 1 ]    }} </td>
+      <td style="text-align: center; vertical-align: middle;"> {{ data["CP4"][loop.index - 1 ]   }}	</td>
+    </tr>
+    
+  {% endfor %}
+</table>
+<br>
+
+</div>
+
+<h3>Comments:</h3>
+<table>
+  <tr>
+    <th style="width:15%"></th>
+    <th style="width:5%"></th>
+    <th style="width:70%"></th>
+  </tr>
+  {% for comment in ds_info.comments %}
+  <tr>
+    <td> {{ comment.time_created }} </td>
+    <td> {{ comment.username }} </td>
+    <td>{{ comment.commenttext }}</td>
+  </tr>
+{% endfor %}
+</table>
+
+
+
+<form action="{{ url_for('add_comment', ds_id=ds_info.ds_id) }}" method="POST">
+  <input type="text" name="comment" placeholder="..." required>
+  <button type="submit">Add Comment</button>
+</form>
+
+<script src="/static/javascript/showData.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const labels = {{ data["labels"] | tojson}};
+
+  const data = {
+      labels: labels,
+      datasets: [{
+        label: 'CP3',
+        backgroundColor: 'rgb(0, 0, 255)',
+        borderColor: 'rgb(0, 0, 255)',
+        fill: false,
+        borderWidth: 2, 
+        borderDash: [5, 5],
+        data: {{ data["CP3"] | tojson}},
+    },
+    {
+       label: 'C3',
+       backgroundColor: 'rgb(255, 0, 0)',
+       borderColor: 'rgb(255, 0, 0)',
+       fill: false,
+       borderWidth: 2, 
+       borderDash: [5, 5],
+       data: {{ data["C3"] | tojson}},
+    },
+    {
+      label: 'F5',
+      backgroundColor: 'rgb(0, 255, 0)',
+      borderColor: 'rgb(0, 255, 0)',
+      fill: false,
+      borderWidth: 2, 
+      borderDash: [5, 5],
+      data: {{ data["F5"] | tojson}},
+    },
+    {
+      label: 'PO3',
+      backgroundColor: 'rgb(255, 255, 0)',
+      borderColor: 'rgb(255, 255, 0)',
+      fill: false,
+      borderWidth: 2, 
+      borderDash: [5, 5],
+      data: {{ data["PO3"] | tojson}},
+    },
+    {
+      label: 'PO4',
+      backgroundColor: 'rgb(0, 255, 255)',
+      borderColor: 'rgb(0, 255, 255)',
+      fill: false,
+      borderWidth: 2, 
+      borderDash: [5, 5],
+      data: {{ data["PO4"] | tojson}},
+    },
+    {
+      label: 'F6',
+      backgroundColor: 'rgb(255, 0, 255)',
+      borderColor: 'rgb(255, 0, 255)',
+      fill: false,
+      borderWidth: 2, 
+      borderDash: [5, 5],
+      data: {{ data["F6"] | tojson}},
+    },
+    {
+      label: 'C4',
+      backgroundColor: 'rgb(100, 100, 255)',
+      borderColor: 'rgb(100, 100, 255)',
+      fill: false,
+      borderWidth: 2, 
+      borderDash: [5, 5],
+      data: {{ data["C4"] | tojson}},
+    },
+    {
+      label: 'CP4',
+      backgroundColor: 'rgb(255, 100, 100)',
+      borderColor: 'rgb(255, 100, 100)',
+      fill: false,
+      borderWidth: 2, 
+      borderDash: [5, 5],
+      data: {{ data["CP4"] | tojson}},
+    }]
+    };
+
+  const config = {
+      type: 'line',
+      data: data,
+      options: {  maintainAspectRatio: false,
+                  elements: {
+                              point:{
+                                  radius: 0
+                                    }
+                           }
+               }
+  };
+
+  const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+  );
+
+</script>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% set title = "Register" %}
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- [html-validate-disable attribute-allowed-values] -->
+    <form action="{{ url_for('register_action') }}" method="POST">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Register</button>
+    </form>
+{% endblock %}

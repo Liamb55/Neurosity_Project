@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+      <h2>Hi, {{ djuser.username }}</h2>
+      <p></p>
+      
+      <form method = "POST" enctype="multipart/form-data" action = "/upload"> 
+        <p style="color:blue;">Choose csv file to upload</p>   
+        <input type="file" name="file" accept=".csv">
+        <textarea rows="5" cols="60" name="description" placeholder="Enter description" style="height:50px;width:300px"></textarea>
+        <input type = "submit" value="Upload" style="height:30px;width:320px">  
+      </form>
+    
+      <h3> Owned Datasets: </h3>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Dataset name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr><td></td></tr>
+          {% for ds in djuser.ds_owned %}
+            <tr>
+                <td><a href="{{ url_for('showData', ds_id=ds.ds_id) }}"> {{ ds.name }} </a></td>
+                <td> {{ ds.description }} </td>
+                <td> {{ ds.owner_username }} </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <h3> Subscribed Datasets: </h3>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Dataset name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ds in djuser.ds_subscribed %}
+          <tr>
+            <td><a href="{{ url_for('showData', ds_id=ds.ds_id ) }}"> {{ ds.name }} </a></td>
+            <td> {{ ds.description }} </td>
+            <td> {{ ds.owner_username }} </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% endblock %}
+    
+
