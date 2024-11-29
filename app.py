@@ -195,14 +195,8 @@ def showData(ds_id):
 
     data = {"labels":[], "CP3":[], "C3":[], "F5":[], "PO3":[], "PO4":[], "F6":[], "C4":[], "CP4":[]}
 
-    IsFirstRub = True
-
     for index, row in uploaded_df.iterrows():
-        if IsFirstRub:
-            time_offset = float(format(row[10], '.8f'))
-            IsFirstRub = False
-    
-        data["labels"].append(format(float(format(row[10], '.8f'))-time_offset, '.2f'))
+        data["labels"].append(format(row[10], '.3f'))
         data["CP3"].append(format(row[1], '.3f'))
         data["C3"].append(format(row[2], '.3f'))
         data["F5"].append(format(row[3], '.3f'))
