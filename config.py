@@ -10,4 +10,4 @@ ALLOWED_EXTENSIONS = {'csv'}
 #SQLALCHEMY_DATABASE_URI = os.getenv('LOCAL_DATABASE_URL', 'postgresql://localhost/analysis?user=postgres&password=database1530!')
 SQLALCHEMY_DATABASE_URI = os.getenv('LOCAL_DATABASE_URL', 'postgresql://neurosity_db_user:ShGcMbFsX8GUCjEULX9Io0oWNrY32oPy@dpg-ct4t8hpu0jms73aahdvg-a/neurosity_db')
 #UPLOAD_FOLDER = os.path.join('staticFiles', 'uploads')
-UPLOAD_FOLDER = '/' + s.path.join('var', 'uploads')
+UPLOAD_FOLDER = '/var/uploads'  # + s.path.join('var', 'uploads')
