@@ -196,7 +196,7 @@ def showData(ds_id):
     data = {"labels":[], "CP3":[], "C3":[], "F5":[], "PO3":[], "PO4":[], "F6":[], "C4":[], "CP4":[]}
 
     for index, row in uploaded_df.iterrows():
-        data["labels"].append(format(row[10], '.3f'))
+        data["labels"].append(format(row[10], '.8f'))
         data["CP3"].append(format(row[1], '.3f'))
         data["C3"].append(format(row[2], '.3f'))
         data["F5"].append(format(row[3], '.3f'))
